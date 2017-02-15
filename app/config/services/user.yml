@@ -1,0 +1,23 @@
+parameters:
+    user.service.class: AppBundle\Service\UserService
+    user.command_repository.class: AppBundle\Repository\UserCommandRepository
+    user.query_repository.class: AppBundle\Repository\UserQueryRepository
+
+services:
+    user.command_repository:
+        class: "%user.command_repository.class%"
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@validator"
+
+    user.query_repository:
+        class: "%user.query_repository.class%"
+        arguments:
+            - "@doctrine.orm.entity_manager"
+
+    user.service:
+        class: "%user.service.class%"
+        arguments:
+            - "@user.command_repository"
+            - "@user.query_repository"
+            - "@mailer"

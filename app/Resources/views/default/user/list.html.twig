@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Users List</h1>
+
+    {% if users|length %}
+
+        <div class="row">
+            <div class="col-lg-2 col-lg-offset-10 text-right">
+                <a href="{{ path("add_new_user") }}" class="btn btn-block btn-info">Add new user</a>
+            </div>
+        </div>
+
+        {% for user in users %}
+            <fieldset>
+                <legend>{{ user.name }}</legend>
+                <ul>
+                    <li><b>email: </b>{{ user.email }}</li>
+                    <li>
+                        <b>comments: </b>
+                        {{ user.comments }}
+                        [<a href="{{ path("add_new_comment", {'userId': user.id}) }}">Add new comment</a>]
+                        [<a href="{{ path("show_user_comments", {'userId': user.id}) }}">View comments</a>]
+                    </li>
+                </ul>
+            </fieldset>
+        {% endfor %}
+    {% else %}
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2>There are no users yet. Click below to add one</h2>
+                <a href="{{ path("add_new_user") }}" class="btn btn-block btn-info">Add new user</a>
+            </div>
+        </div>
+
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Comments for user {{ userName }}</h1>
+
+    {% if comments|length %}
+
+        <div class="row">
+            <div class="col-lg-2 col-lg-offset-10 text-right">
+                <a href="{{ path("add_new_comment", {'userId': userId}) }}" class="btn btn-block btn-info">Add new comment</a>
+            </div>
+        </div>
+
+        {% for comment in comments %}
+            <fieldset>
+                <legend>{{ comment.title }}</legend>
+                <blockquote>
+                    {{ comment.content }}
+                </blockquote>
+                <div class="row text-right">@{{ comment.createdOn|date("d.m.Y H:i") }}</div>
+            </fieldset>
+        {% endfor %}
+    {% else %}
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2>There are no comments for this user yet. Click below to add one</h2>
+                <a href="{{ path("add_new_comment", {'userId': userId}) }}" class="btn btn-block btn-info">Add new comment</a>
+            </div>
+        </div>
+
+    {% endif %}
+{% endblock %}

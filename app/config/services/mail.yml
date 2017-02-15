@@ -1,0 +1,9 @@
+parameters:
+    mail.service.class: AppBundle\Service\MailService
+
+services:
+    mail.service:
+        class: "%mail.service.class%"
+        arguments:
+            - "@mailer"
+            - "@user.service"

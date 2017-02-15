@@ -1,0 +1,4 @@
+imports:
+    - { resource: './services/user.yml' }
+    - { resource: './services/comment.yml' }
+    - { resource: './services/mail.yml' }

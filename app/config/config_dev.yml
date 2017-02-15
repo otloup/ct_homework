@@ -1,0 +1,39 @@
+imports:
+    - { resource: config.yml }
+
+framework:
+    router:
+        resource: "%kernel.root_dir%/config/routing_dev.yml"
+        strict_requirements: true
+    profiler: { only_exceptions: false }
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            channels: [!event]
+        console:
+            type:   console
+            channels: [!event, !doctrine]
+
+swiftmailer:
+    transport:            smtp
+    username:             f10035b8f4a55b
+    password:             d294edede2d215
+    host:                 smtp.mailtrap.io
+    port:                 2525
+    encryption:           ~
+    auth_mode:            cram-md5
+    sender_address:       prospective_employee@clicktrans.com
+    antiflood:
+        threshold:            99
+        sleep:                0
+    delivery_addresses:   []
+    disable_delivery:     false
+    logging:              '%kernel.debug%'

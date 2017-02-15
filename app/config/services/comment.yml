@@ -1,0 +1,21 @@
+parameters:
+    comment.service.class: AppBundle\Service\CommentService
+    comment.command_repository.class: AppBundle\Repository\CommentCommandRepository
+    comment.query_repository.class: AppBundle\Repository\CommentQueryRepository
+
+services:
+    comment.command_repository:
+        class: "%comment.command_repository.class%"
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@validator"
+
+    comment.query_repository:
+        class: "%comment.query_repository.class%"
+        arguments:
+            - "@doctrine.orm.entity_manager"
+
+    comment.service:
+        class: "%comment.service.class%"
+        arguments:
+            - "@comment.command_repository"
